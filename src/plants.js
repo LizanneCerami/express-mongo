@@ -24,3 +24,14 @@ export async function deletePlant(req, res) {
   res.status(201).send( {message: "plant has been deleted"});
 }
 
+// CRUD: UPDATE - update/patch
+export async function updatePlant(req, res) {
+  const docId = { "_id": new ObjectId(req.params.docId)};
+  const updatePlant = req.body;
+
+  await coll.findOneAndUpdate(
+    { "_id": docId },
+    {$set: {updatePlant} }
+  );
+  res.status(201).send( {message: "plant has been updated"})
+}
